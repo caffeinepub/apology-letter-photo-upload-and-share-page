@@ -1,0 +1,136 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Apology Letter Photo Upload + Share (Frontend)",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Build the single-page upload flow: pick an image, preview it, upload it, then show a shareable link to the view route.",
+      "acceptanceCriteria": [
+        "A user can select an image file (common formats like PNG/JPG) from their device and see a preview before submitting.",
+        "After submitting, the app displays a unique shareable URL for viewing the uploaded image.",
+        "Visiting the shareable URL in a fresh browser session loads and displays the uploaded image without requiring login.",
+        "If the uploaded file is not an image, the UI shows a clear validation error in English and prevents upload."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the app shell that renders the upload view by default and wires navigation to the dedicated view route; ensure the shareable URL produced after upload points at the view route."
+        },
+        {
+          "path": "frontend/src/pages/UploadLetterPage.tsx",
+          "operation": "create",
+          "description": "Implement the upload page UI: image file picker with client-side image validation (MIME/type + extension), preview rendering, submit button with disabled/loading states, and a post-upload share link display (copy-friendly). Use shadcn-ui composed components (e.g., Button/Input/Card/Alert equivalents as available) without editing files under frontend/src/components/ui. Verify the component's usage instructions before implementing. Use the blob-storage component's ExternalBlob.fromBytes(...) (optionally withUploadProgress(...)) to upload via backend.uploadApologyLetter and then build the share URL from the returned id. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/lib/imageValidation.ts",
+          "operation": "create",
+          "description": "Add a small utility to validate that a chosen file is an image (PNG/JPG/etc.), returning a clear English error message when invalid; used to prevent uploads of non-image files."
+        },
+        {
+          "path": "frontend/src/lib/shareUrl.ts",
+          "operation": "create",
+          "description": "Add a helper to generate the absolute shareable URL for the view route (including origin + path) from an uploaded letter id."
+        },
+        {
+          "path": "frontend/src/services/apologyLetters.ts",
+          "operation": "create",
+          "description": "Create a thin frontend service for calling backend.uploadApologyLetter and backend.getApologyLetter using the existing core-infrastructure backend connection pattern in this template (do not add authentication). Convert selected File -> bytes -> blob-storage ExternalBlob and return the created id. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/main.tsx",
+          "operation": "modify",
+          "description": "Ensure the app bootstraps correctly with the App router/shell and imports the correct global stylesheet location (the Tailwind+CSS variables file), so the upload/share flow renders with the intended theme."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Add a dedicated 'View shared letter' route that reads the ID from the URL, fetches the image, and displays it responsively with loading/error states.",
+      "acceptanceCriteria": [
+        "The view page shows a loading state while fetching.",
+        "If the ID is invalid/not found, the view page shows an English error message and a link back to the upload page.",
+        "The displayed image scales to fit mobile and desktop screens without overflowing."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/ViewSharedLetterPage.tsx",
+          "operation": "create",
+          "description": "Implement the view page: read the id from the route, fetch the ApologyLetter via backend.getApologyLetter, handle loading and not-found/error states, and render the image responsively. Prefer using blob-storage ExternalBlob.getDirectURL() for the image src to leverage streaming/caching; fall back to getBytes() only if needed. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the 'View shared letter' page into routing (e.g., /view/:id) and ensure it is reachable from the share link shown after upload."
+        },
+        {
+          "path": "frontend/src/services/apologyLetters.ts",
+          "operation": "modify",
+          "description": "Add/confirm a function that fetches a letter by id and returns the ApologyLetter, surfacing not-found in a way the view page can present as a friendly English error message."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Apply a coherent, creative warm/neutral visual theme (no blue/purple primaries) consistently across upload and view pages with responsive layout.",
+      "acceptanceCriteria": [
+        "The app has a consistent color palette, typography, and component styling across all pages.",
+        "Primary styling does not use blue/purple as the main theme colors.",
+        "Layout looks good on both mobile and desktop (no obvious overlapping/clipped UI)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/index.css",
+          "operation": "modify",
+          "description": "Adjust global CSS variables (Tailwind/shadcn token variables such as --primary/--background/--foreground, etc.) to a warm neutral palette (e.g., cream/rose/brown/charcoal) ensuring blue/purple are not the primary theme colors; keep typography/spacing consistent across pages."
+        },
+        {
+          "path": "frontend/src/components/AppLayout.tsx",
+          "operation": "create",
+          "description": "Create a reusable layout wrapper (header + centered content container + consistent spacing) used by both upload and view pages to ensure cohesive styling and responsive behavior; compose shadcn-ui primitives without modifying frontend/src/components/ui. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/UploadLetterPage.tsx",
+          "operation": "modify",
+          "description": "Update the upload page to use the shared AppLayout and consistent component variants (buttons, cards, typographic hierarchy) for the chosen theme; ensure mobile/desktop spacing and responsive preview sizing."
+        },
+        {
+          "path": "frontend/src/pages/ViewSharedLetterPage.tsx",
+          "operation": "modify",
+          "description": "Update the view page to use the shared AppLayout and match theme styles; ensure the image container is responsive (no overflow) and the error/loading states match the design system."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Add the generated static theme images (logo + illustration) under public assets and render them on the upload page header without using the backend.",
+      "acceptanceCriteria": [
+        "Generated images are stored under frontend/public/assets/generated and referenced directly by the frontend.",
+        "The upload page includes the generated illustration/logo in the header area."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/apology-illustration.dim_1200x400.png",
+          "operation": "create",
+          "description": "Add the generated static illustration asset at the exact path frontend/public/assets/generated/apology-illustration.dim_1200x400.png and ensure it is referenced directly by the frontend (no backend routing)."
+        },
+        {
+          "path": "frontend/public/assets/generated/apology-logo.dim_256x256.png",
+          "operation": "create",
+          "description": "Add the generated static logo asset at the exact path frontend/public/assets/generated/apology-logo.dim_256x256.png and ensure it is referenced directly by the frontend (no backend routing)."
+        },
+        {
+          "path": "frontend/src/pages/UploadLetterPage.tsx",
+          "operation": "modify",
+          "description": "Render the generated header illustration and logo from frontend/public/assets/generated/apology-illustration.dim_1200x400.png and frontend/public/assets/generated/apology-logo.dim_256x256.png in the header area of the upload page; keep responsive sizing and consistent theme spacing."
+        },
+        {
+          "path": "frontend/src/components/AppLayout.tsx",
+          "operation": "modify",
+          "description": "If the layout includes a global header, optionally incorporate the generated logo as a brand mark (still referenced directly from frontend/public/assets/generated/apology-logo.dim_256x256.png) while keeping the upload page’s required header illustration placement intact."
+        }
+      ]
+    }
+  ]
+}

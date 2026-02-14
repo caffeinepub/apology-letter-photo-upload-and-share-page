@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Build a simple website that lets a user attach/upload a photo of an apology letter to send/share with their boyfriend.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Minimal line-art illustration of an envelope with a small heart, warm neutral palette (apology-illustration.dim_1200x400.png)\n- Simple monochrome site mark combining a small envelope icon and initials 'AL' (apology-logo.dim_256x256.png)",
+  "existing_features": [
+    {
+      "id": "feature-create-a-single-page-website-that-lets-a-user-attach-upload-a-photo-of-an-apology-letter-and-then-generate-a-shareable-link-that-can-be-sent-to-their-boyfriend-to-view-the-uploaded-photo",
+      "title": "Create a single-page website that lets a user attach/upload a photo of an apology letter and then generate a shareable link that can be sent to their boyfriend to view the uploaded photo.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-dedicated-view-shared-letter-route-page-that-reads-the-id-from-the-url-fetches-the-image-from-the-backend-and-renders-it-responsively-with-basic-loading-and-error-states",
+      "title": "Create a dedicated 'View shared letter' route/page that reads the ID from the URL, fetches the image from the backend, and renders it responsively with basic loading and error states.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-coherent-creative-visual-theme-appropriate-for-a-personal-apology-letter-sharing-page-avoid-blue-purple-as-primary-colors-and-use-it-consistently-across-upload-and-view-pages-typography-spacing-buttons-and-layout",
+      "title": "Apply a coherent, creative visual theme appropriate for a personal apology-letter sharing page (avoid blue/purple as primary colors), and use it consistently across upload and view pages (typography, spacing, buttons, and layout).",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-static-images-as-part-of-the-ui-theme-logo-illustration-and-render-them-from-frontend-public-assets-generated-without-routing-images-through-the-backend",
+      "title": "Add generated static images as part of the UI theme (logo/illustration) and render them from frontend/public/assets/generated without routing images through the backend.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Website for uploading/attaching a photo of an apology letter to share/send to boyfriend",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Implement backend storage and retrieval for uploaded apology-letter images using the single Motoko actor, including creation of a unique public ID per upload and a read endpoint to fetch the image by ID.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Apology Letter Photo Upload and Share Page",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

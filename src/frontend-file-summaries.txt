@@ -1,0 +1,12 @@
+{
+  "frontend/src/App.tsx": "Main application component that sets up TanStack Router with routes for upload (/) and view (/view/:id) pages, wrapped in AppLayout.",
+  "frontend/src/components/AppLayout.tsx": "Reusable layout wrapper component providing consistent header/footer structure with Outlet for page content and branded footer with caffeine.ai attribution.",
+  "frontend/src/pages/UploadLetterPage.tsx": "Upload page component with image file selection, preview, validation, upload progress tracking, and shareable link generation after successful upload.",
+  "frontend/src/pages/ViewSharedLetterPage.tsx": "View page component that fetches and displays a shared apology letter by ID with loading states, error handling, and navigation back to upload.",
+  "frontend/src/hooks/useQueries.ts": "React Query hook for fetching apology letter data from the backend by ID.",
+  "frontend/src/services/apologyLetters.ts": "Service layer for uploading apology letter images to the backend using ExternalBlob with progress tracking.",
+  "frontend/src/lib/imageValidation.ts": "Utility function to validate image files by type and size before upload, returning user-friendly error messages.",
+  "frontend/src/lib/shareUrl.ts": "Helper function to generate absolute shareable URLs for viewing uploaded letters.",
+  "frontend/src/index.css": "Global styles with OKLCH color system defining a warm, romantic palette (cream/rose/brown tones) for both light and dark modes.",
+  "frontend/tailwind.config.js": "Tailwind configuration extending the theme with custom fonts, colors mapped to CSS variables, border radius, shadows, and animations."
+}

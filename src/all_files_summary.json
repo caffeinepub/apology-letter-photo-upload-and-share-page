@@ -1,0 +1,21 @@
+{
+  "backend/main.mo": "Motoko canister storing apology letters in a map and exposing upload, fetch-by-id, and list-all query methods.",
+  "feature_evidence.json": "Feature evidence report listing implemented features, involved files, components, tests, and confidence levels.",
+  "frontend-file-summaries.txt": "Text file containing prewritten one-line summaries for key frontend files.",
+  "frontend/index.css": "Tailwind-based global stylesheet defining theme variables and dark-mode overrides.",
+  "frontend/index.html": "Base HTML entry file with root div and script loading the React app.",
+  "frontend/src/App.tsx": "Sets up TanStack Router with upload and view routes wrapped in AppLayout.",
+  "frontend/src/components/AppLayout.tsx": "Layout component providing page structure and footer with branding link.",
+  "frontend/src/hooks/useActor.ts": "Hook creating and managing a backend actor tied to Internet Identity state.",
+  "frontend/src/hooks/useInternetIdentity.ts": "Context and provider managing Internet Identity login, state, and persistence.",
+  "frontend/src/hooks/useQueries.ts": "React Query hook for fetching an apology letter by ID from the backend.",
+  "frontend/src/index.css": "No summary available.",
+  "frontend/src/lib/imageValidation.ts": "Validates image type and size, returning error messages if invalid.",
+  "frontend/src/lib/shareUrl.ts": "Generates a full URL for viewing a specific uploaded letter.",
+  "frontend/src/main.tsx": "React entry point wiring up QueryClient, InternetIdentity provider, and rendering App.",
+  "frontend/src/pages/UploadLetterPage.tsx": "UI page for selecting, validating, previewing, and uploading an apology-letter image, then displaying and copying a generated share URL.",
+  "frontend/src/pages/ViewSharedLetterPage.tsx": "Page that loads an apology letter by ID, shows loading/error states, and displays the retrieved image with navigation back home.",
+  "frontend/src/services/apologyLetters.ts": "Service for uploading an apology-letter file by converting it to bytes, attaching progress callbacks, and sending it to the backend.",
+  "frontend/tailwind.config.js": "Tailwind CSS configuration extending theme colors, fonts, layout, and animations for the site’s visual styling.",
+  "project_state.json": "Project metadata describing requirements, features, pending requests, assets, and architectural notes for the apology-letter site."
+}

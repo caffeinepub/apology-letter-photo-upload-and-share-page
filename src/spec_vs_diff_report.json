@@ -1,0 +1,72 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-14T19:37:34.275Z",
+  "summary": "Core upload + share-link flow and a dedicated view route are implemented on the frontend, along with basic image validation and a warm-themed Tailwind setup. However, required generated static theme images are not present/referenced, and backend not-found handling and ID generation do not meet the acceptance criteria (trap + non-unique ID). Some extra features (II integration, list-all API, caffeine.ai footer) appear beyond the request.",
+  "missing_requirements": [
+    {
+      "id": "REQ-2",
+      "requirement": "Backend must return a clear not-found result for missing IDs (that the frontend can handle gracefully), and provide unique public IDs per upload.",
+      "reason": "The backend `getApologyLetter` traps on missing IDs instead of returning a not-found result, and `uploadApologyLetter` uses `name` as the ID (not guaranteed unique and caller-controlled), which does not satisfy unique public ID creation.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "requirement": "Add generated static images (apology-illustration.dim_1200x400.png, apology-logo.dim_256x256.png) under frontend/public/assets/generated and reference them directly in the upload page header.",
+      "reason": "No files under `frontend/public/assets/generated` are shown in the diff summary, and no direct references to those asset paths are visible in the added frontend pages/components.",
+      "evidence": [
+        "frontend/src/pages/UploadLetterPage.tsx",
+        "frontend/src/components/AppLayout.tsx"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Internet Identity integration/provider and actor-selection logic based on authentication state.",
+      "reason": "The request explicitly says Internet Identity is allowed but not required; implementing II hooks/provider is additional scope not requested by any REQ.",
+      "evidence": [
+        "frontend/src/main.tsx",
+        "frontend/src/hooks/useInternetIdentity.ts",
+        "frontend/src/hooks/useActor.ts"
+      ]
+    },
+    {
+      "description": "Backend method to list all apology letters (`getAllApologyLetters`).",
+      "reason": "REQ-2 only asks for create/store and retrieve-by-ID; listing all uploads is not requested.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "description": "Branded footer with caffeine.ai attribution link.",
+      "reason": "No requirement requests external branding/attribution; this is extra UI content.",
+      "evidence": [
+        "frontend/src/components/AppLayout.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.78,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/AppLayout.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/index.css",
+    "frontend/src/lib/imageValidation.ts",
+    "frontend/src/lib/shareUrl.ts",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/UploadLetterPage.tsx",
+    "frontend/src/pages/ViewSharedLetterPage.tsx",
+    "frontend/src/services/apologyLetters.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

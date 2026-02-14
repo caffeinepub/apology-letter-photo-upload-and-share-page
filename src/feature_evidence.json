@@ -1,0 +1,92 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-create-a-single-page-website-that-lets-a-user-attach-upload-a-photo-of-an-apology-letter-and-then-generate-a-shareable-link-that-can-be-sent-to-their-boyfriend-to-view-the-uploaded-photo",
+      "featureTitle": "Create a single-page website that lets a user attach/upload a photo of an apology letter and then generate a shareable link that can be sent to their boyfriend to view the uploaded photo.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/lib/imageValidation.ts",
+        "frontend/src/lib/shareUrl.ts",
+        "frontend/src/main.tsx",
+        "frontend/src/pages/UploadLetterPage.tsx",
+        "frontend/src/services/apologyLetters.ts"
+      ],
+      "components": [
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-dedicated-view-shared-letter-route-page-that-reads-the-id-from-the-url-fetches-the-image-from-the-backend-and-renders-it-responsively-with-basic-loading-and-error-states",
+      "featureTitle": "Create a dedicated 'View shared letter' route/page that reads the ID from the URL, fetches the image from the backend, and renders it responsively with basic loading and error states.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/ViewSharedLetterPage.tsx",
+        "frontend/src/services/apologyLetters.ts"
+      ],
+      "components": [
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-apply-a-coherent-creative-visual-theme-appropriate-for-a-personal-apology-letter-sharing-page-avoid-blue-purple-as-primary-colors-and-use-it-consistently-across-upload-and-view-pages-typography-spacing-buttons-and-layout",
+      "featureTitle": "Apply a coherent, creative visual theme appropriate for a personal apology-letter sharing page (avoid blue/purple as primary colors), and use it consistently across upload and view pages (typography, spacing, buttons, and layout).",
+      "files": [
+        "frontend/index.css",
+        "frontend/src/components/AppLayout.tsx",
+        "frontend/src/pages/UploadLetterPage.tsx",
+        "frontend/src/pages/ViewSharedLetterPage.tsx"
+      ],
+      "components": [
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-generated-static-images-as-part-of-the-ui-theme-logo-illustration-and-render-them-from-frontend-public-assets-generated-without-routing-images-through-the-backend",
+      "featureTitle": "Add generated static images as part of the UI theme (logo/illustration) and render them from frontend/public/assets/generated without routing images through the backend.",
+      "files": [
+        "frontend/src/components/AppLayout.tsx",
+        "frontend/src/pages/UploadLetterPage.tsx"
+      ],
+      "components": [
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

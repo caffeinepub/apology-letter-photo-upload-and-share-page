@@ -1,0 +1,107 @@
+{
+  "kind": "build_request",
+  "title": "Apology Letter Photo Upload and Share Page",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create a single-page website that lets a user attach/upload a photo of an apology letter and then generate a shareable link that can be sent to their boyfriend to view the uploaded photo.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "create a website where i can attach a photo of an apology letter to my boyfruesnd"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A user can select an image file (common formats like PNG/JPG) from their device and see a preview before submitting.",
+        "After submitting, the app displays a unique shareable URL for viewing the uploaded image.",
+        "Visiting the shareable URL in a fresh browser session loads and displays the uploaded image without requiring login.",
+        "If the uploaded file is not an image, the UI shows a clear validation error in English and prevents upload."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement backend storage and retrieval for uploaded apology-letter images using the single Motoko actor, including creation of a unique public ID per upload and a read endpoint to fetch the image by ID.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "attach a photo of an apology letter"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend provides a method to create/store an uploaded image and returns a unique ID.",
+        "Backend provides a query method to retrieve the stored image (bytes + content type) by ID.",
+        "If an ID does not exist, the backend returns a clear not-found result that the frontend handles gracefully.",
+        "All backend logic remains in the single main actor file; no additional backend services are introduced."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Create a dedicated 'View shared letter' route/page that reads the ID from the URL, fetches the image from the backend, and renders it responsively with basic loading and error states.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The view page shows a loading state while fetching.",
+        "If the ID is invalid/not found, the view page shows an English error message and a link back to the upload page.",
+        "The displayed image scales to fit mobile and desktop screens without overflowing."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Apply a coherent, creative visual theme appropriate for a personal apology-letter sharing page (avoid blue/purple as primary colors), and use it consistently across upload and view pages (typography, spacing, buttons, and layout).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The app has a consistent color palette, typography, and component styling across all pages.",
+        "Primary styling does not use blue/purple as the main theme colors.",
+        "Layout looks good on both mobile and desktop (no obvious overlapping/clipped UI)."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Add generated static images as part of the UI theme (logo/illustration) and render them from frontend/public/assets/generated without routing images through the backend.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Generated images are stored under frontend/public/assets/generated and referenced directly by the frontend.",
+        "The upload page includes the generated illustration/logo in the header area."
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain a single Motoko actor (all logic in the main actor file).",
+    "Do not edit files under frontend/src/components/ui (compose them instead).",
+    "Do not edit immutable hook files under frontend/src/hooks/* listed by the platform; integrate via new components/hooks as needed."
+  ],
+  "nonGoals": [
+    "Sending the photo via email/SMS or integrating with messaging services.",
+    "Real-time chat or notifications.",
+    "Third-party authentication providers (only Internet Identity is allowed, but not required for this request).",
+    "External databases or cloud storage providers."
+  ],
+  "imageRequirements": {
+    "required": [
+      "Minimal line-art illustration of an envelope with a small heart, warm neutral palette (apology-illustration.dim_1200x400.png)",
+      "Simple monochrome site mark combining a small envelope icon and initials 'AL' (apology-logo.dim_256x256.png)"
+    ],
+    "edits": []
+  }
+}

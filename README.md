@@ -1,2 +1,3 @@
-# apology-letter-photo-upload-and-share-page
-Exported from Caffeine project: Apology Letter Photo Upload and Share Page
+## Apology Letter Photo Upload and Share Page
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`
